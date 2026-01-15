@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpKeep - Home Maintenance Made Simple</title>
+    <meta name="description" content="Track maintenance tasks across all your properties. Offline-first, private, and simple.">
+    <link rel="icon" type="image/png" href="images/app-icon.png">
+    <link rel="apple-touch-icon" href="images/app-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --primary-dark: #0052A3;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(180deg, var(--gray-50) 0%, white 100%);
+        }
+
+        .hero .container {
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .app-store-badge {
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .app-store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .app-store-badge img {
+            height: 54px;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: var(--gray-900);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 32px;
+        }
+
+        /* Screenshots */
+        .screenshots {
+            padding: 80px 0;
+            background: var(--gray-50);
+            overflow: hidden;
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--gray-900);
+            margin-bottom: 60px;
+        }
+
+        .screenshots-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .screenshot-item {
+            text-align: center;
+        }
+
+        .screenshot-item img {
+            width: 220px;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item img:hover {
+            transform: translateY(-8px);
+        }
+
+        .screenshot-item p {
+            margin-top: 16px;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        @media (max-width: 768px) {
+            .screenshots-grid {
+                gap: 32px;
+            }
+
+            .screenshot-item img {
+                width: 160px;
+            }
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--gray-900);
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 32px;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gray-100);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .feature h3 {
+            font-size: 1.25rem;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            color: var(--gray-600);
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 80px 0;
+            background: var(--gray-50);
+        }
+
+        .use-cases h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--gray-900);
+            margin-bottom: 60px;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .use-case {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .use-case h3 {
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+
+        .use-case p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        /* Privacy */
+        .privacy {
+            padding: 80px 0;
+        }
+
+        .privacy h2 {
+            font-size: 2.5rem;
+            color: var(--gray-900);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--gray-50);
+            padding: 48px;
+            border-radius: 16px;
+        }
+
+        .privacy-content h3 {
+            font-size: 1.25rem;
+            color: var(--gray-900);
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        .privacy-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .privacy-content p {
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+
+        .privacy-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .last-updated {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features h2,
+            .use-cases h2,
+            .privacy h2 {
+                font-size: 2rem;
+            }
+
+            .privacy-content {
+                padding: 32px 24px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="images/app-icon.png" alt="UpKeep app icon">
+                UpKeep
+            </a>
+            <ul class="nav-links">
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <img src="images/app-icon.png" alt="UpKeep" class="hero-icon">
+            <h1>Home Maintenance<br>Made Simple</h1>
+            <p>Track maintenance tasks across all your properties. Set schedules, get reminders, and keep a complete history. All on your device, completely private.</p>
+            <span class="coming-soon">Coming Soon to the App Store</span>
+        </div>
+    </section>
+
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <h2>See It in Action</h2>
+            <div class="screenshots-grid">
+                <div class="screenshot-item">
+                    <img src="images/today.png" alt="Today view showing overdue and upcoming maintenance tasks">
+                    <p>Today</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/properties.png" alt="Properties list showing multiple homes">
+                    <p>Properties</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/plans.png" alt="Maintenance plans for organizing tasks">
+                    <p>Plans</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/library.png" alt="Task template library organized by category">
+                    <p>Library</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Everything You Need</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Multiple Properties</h3>
+                    <p>Manage your primary home, rental properties, vacation homes, and multi-family units all in one place.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Smart Scheduling</h3>
+                    <p>Set up recurring tasks with flexible schedules: daily, weekly, monthly, quarterly, or annual maintenance.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📋</div>
+                    <h3>Maintenance Plans</h3>
+                    <p>Create reusable plans from task templates. Apply the same maintenance routine to multiple properties.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Timely Reminders</h3>
+                    <p>Get notified when tasks are due. Follow-up reminders ensure nothing falls through the cracks.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Complete History</h3>
+                    <p>Keep an immutable record of all completed maintenance. Great for documentation and resale value.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Private</h3>
+                    <p>All data stays on your device. No account required, no cloud sync, no tracking. Your data is yours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases">
+        <div class="container">
+            <h2>Built For</h2>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <h3>Homeowners</h3>
+                    <p>Stay on top of HVAC filter changes, gutter cleaning, smoke detector batteries, and seasonal maintenance without the mental load.</p>
+                </div>
+                <div class="use-case">
+                    <h3>DIY Landlords</h3>
+                    <p>Manage maintenance across multiple rental units. Track what's been done, what's due, and maintain documentation for each property.</p>
+                </div>
+                <div class="use-case">
+                    <h3>Vacation Home Owners</h3>
+                    <p>Don't let distance mean neglect. Schedule and track maintenance for properties you don't visit daily.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="privacy" id="privacy">
+        <div class="container">
+            <h2>Privacy Policy</h2>
+            <div class="privacy-content">
+                <p class="last-updated">Last updated: January 15, 2025</p>
+
+                <h3>Your Privacy Matters</h3>
+                <p>UpKeep is designed with your privacy as a core principle. We believe your home maintenance data should belong to you and only you.</p>
+
+                <h3>Data Storage</h3>
+                <p>All data you enter in UpKeep, including properties, tasks, maintenance records, and completion history, is stored locally on your device only. We do not collect, transmit, or store any of your data on external servers.</p>
+
+                <h3>No Account Required</h3>
+                <p>UpKeep works entirely offline. No account creation, email address, or sign-in is required to use the app. Your identity remains completely private.</p>
+
+                <h3>No Analytics or Tracking</h3>
+                <p>We do not use any analytics services, advertising SDKs, crash reporting tools, or tracking mechanisms of any kind. We have no way to see how you use the app or what data you enter.</p>
+
+                <h3>Notifications</h3>
+                <p>UpKeep uses local notifications to remind you of upcoming and overdue maintenance tasks. These notifications are generated and scheduled entirely on your device. No notification data is ever sent to us or any third party.</p>
+
+                <h3>No Data Sharing</h3>
+                <p>Since we don't collect any data, we have nothing to share. Your maintenance records, property information, and task history never leave your device.</p>
+
+                <h3>Data Deletion</h3>
+                <p>You have complete control over your data. Deleting the app removes all associated data from your device. There are no backups on our servers because we don't have servers storing your data.</p>
+
+                <h3>Contact</h3>
+                <p>If you have questions about this privacy policy, please contact us at: <a href="mailto:support@example.com">support@example.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 UpKeep. All rights reserved. | <a href="#privacy">Privacy Policy</a></p>
+        </div>
+    </footer>
+</body>
+</html>
