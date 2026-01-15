@@ -120,6 +120,10 @@
             max-width: 600px;
             margin: 0 auto 40px;
         }
+	.hero .title {
+	    font-size: 5rem;
+	    color: var(--primary);
+	}
 
         .app-store-badge {
             display: inline-block;
@@ -152,56 +156,132 @@
             margin-bottom: 32px;
         }
 
-        /* Screenshots */
-        .screenshots {
-            padding: 80px 0;
+        /* Screenshots / How It Works */
+        .how-it-works {
+            padding: 80px 0 0;
             background: var(--gray-50);
-            overflow: hidden;
         }
 
-        .screenshots h2 {
+        .how-it-works-header {
             text-align: center;
+            padding-bottom: 60px;
+        }
+
+        .how-it-works-header h2 {
             font-size: 2.5rem;
             color: var(--gray-900);
-            margin-bottom: 60px;
+            margin-bottom: 16px;
         }
 
-        .screenshots-grid {
+        .how-it-works-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .step-section {
+            padding: 60px 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .step-section:nth-child(odd) {
+            background: white;
+        }
+
+        .step-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step-row.reverse {
+            direction: rtl;
+        }
+
+        .step-row.reverse > * {
+            direction: ltr;
+        }
+
+        .step-content {
+            padding: 20px 0;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .step-content h3 {
+            font-size: 1.75rem;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .step-content p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .step-image {
             display: flex;
             justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
         }
 
-        .screenshot-item {
-            text-align: center;
-        }
-
-        .screenshot-item img {
-            width: 220px;
+        .step-image img {
+            width: 260px;
             height: auto;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .screenshot-item img:hover {
-            transform: translateY(-8px);
-        }
-
-        .screenshot-item p {
-            margin-top: 16px;
-            font-weight: 600;
-            color: var(--gray-700);
+            border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 768px) {
-            .screenshots-grid {
-                gap: 32px;
+            .how-it-works {
+                padding: 60px 0 0;
             }
 
-            .screenshot-item img {
-                width: 160px;
+            .how-it-works-header h2 {
+                font-size: 2rem;
+            }
+
+            .step-section {
+                padding: 50px 0;
+            }
+
+            .step-row {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .step-row.reverse {
+                direction: ltr;
+            }
+
+            .step-content {
+                order: 2;
+            }
+
+            .step-image {
+                order: 1;
+            }
+
+            .step-image img {
+                width: 220px;
             }
         }
 
@@ -390,7 +470,7 @@
                 UpKeep
             </a>
             <ul class="nav-links">
-                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#screenshots">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#privacy">Privacy</a></li>
             </ul>
@@ -400,31 +480,76 @@
     <section class="hero">
         <div class="container">
             <img src="images/app-icon.png" alt="UpKeep" class="hero-icon">
-            <h1>Home Maintenance<br>Made Simple</h1>
-            <p>Track maintenance tasks across all your properties. Set schedules, get reminders, and keep a complete history. All on your device, completely private.</p>
+	    <h1><strong class="title">UpKeep</strong><br>Plan Home Maintenance,<br>Stay Ahead of Problems</h1>
+            <p>Proactive scheduling that keeps your homes maintained, with reminders and history you can trust — all on your device.</p>
             <span class="coming-soon">Coming Soon to the App Store</span>
         </div>
     </section>
 
-    <section class="screenshots" id="screenshots">
+    <section class="how-it-works" id="screenshots">
         <div class="container">
-            <h2>See It in Action</h2>
-            <div class="screenshots-grid">
-                <div class="screenshot-item">
-                    <img src="images/today.png" alt="Today view showing overdue and upcoming maintenance tasks">
-                    <p>Today</p>
+            <div class="how-it-works-header">
+                <h2>How It Works</h2>
+                <p>Set up once, stay organized forever. UpKeep turns home maintenance from a mental burden into an automatic routine.</p>
+            </div>
+        </div>
+
+        <div class="step-section">
+            <div class="container">
+                <div class="step-row">
+                    <div class="step-content">
+                        <span class="step-number">1</span>
+                        <h3>Build Your Library</h3>
+                        <p>Start with common tasks like HVAC filters, gutter cleaning, and smoke detector tests. Add your own custom tasks for anything unique to your properties. Each template captures what needs doing and how often.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/library.png" alt="Task template library organized by category: Exterior, HVAC, Landscaping, Plumbing">
+                    </div>
                 </div>
-                <div class="screenshot-item">
-                    <img src="images/properties.png" alt="Properties list showing multiple homes">
-                    <p>Properties</p>
+            </div>
+        </div>
+
+        <div class="step-section">
+            <div class="container">
+                <div class="step-row reverse">
+                    <div class="step-content">
+                        <span class="step-number">2</span>
+                        <h3>Create Maintenance Plans</h3>
+                        <p>Group related tasks into reusable plans. Monthly home maintenance, seasonal checkups, safety inspections — organize however makes sense for you. Plans make it easy to apply the same routine across multiple properties.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/plans.png" alt="Maintenance plans: Monthly Home Maintenance, Safety & Security, Seasonal Checkup">
+                    </div>
                 </div>
-                <div class="screenshot-item">
-                    <img src="images/plans.png" alt="Maintenance plans for organizing tasks">
-                    <p>Plans</p>
+            </div>
+        </div>
+
+        <div class="step-section">
+            <div class="container">
+                <div class="step-row">
+                    <div class="step-content">
+                        <span class="step-number">3</span>
+                        <h3>Assign to Properties</h3>
+                        <p>Apply any plan to any property with a tap. Whether you have a single home, rental units, or a vacation cabin, each property gets its own maintenance schedule tailored to its needs.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/properties.png" alt="Properties list showing primary residence, rental units, and vacation home">
+                    </div>
                 </div>
-                <div class="screenshot-item">
-                    <img src="images/library.png" alt="Task template library organized by category">
-                    <p>Library</p>
+            </div>
+        </div>
+
+        <div class="step-section">
+            <div class="container">
+                <div class="step-row reverse">
+                    <div class="step-content">
+                        <span class="step-number">4</span>
+                        <h3>Never Miss a Task</h3>
+                        <p>Your Today view shows exactly what needs attention. Overdue items stand out in red. Upcoming tasks keep you prepared. Complete a task and it's logged in your permanent maintenance history — great for records and resale.</p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/today.png" alt="Today view showing overdue tasks with red indicators and upcoming maintenance schedule">
+                    </div>
                 </div>
             </div>
         </div>
