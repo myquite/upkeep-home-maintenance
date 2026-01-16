@@ -96,6 +96,75 @@
             color: var(--primary);
         }
 
+        /* Mobile menu button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gray-900);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile nav styles */
+        @media (max-width: 480px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 0;
+                gap: 0;
+                border-bottom: 1px solid var(--gray-200);
+                display: none;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                border-top: 1px solid var(--gray-100);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 16px 24px;
+            }
+
+            .nav-links a:hover {
+                background: var(--gray-50);
+            }
+        }
+
         /* Hero */
         .hero {
             padding: 140px 0 80px;
@@ -469,6 +538,11 @@
                 <img src="images/app-icon.png" alt="UpKeep app icon">
                 UpKeep
             </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#screenshots">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
@@ -651,5 +725,23 @@
             <p>&copy; 2025 UpKeep. All rights reserved. | <a href="#privacy">Privacy Policy</a></p>
         </div>
     </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
